@@ -4,9 +4,9 @@ class Inliner < Middleman::Extension
   def initialize(app, options_hash={}, &block)
     super
 
-    app.compass_config do |config|
-      config.output_style = :compressed
-    end
+    # app.compass_config do |config|
+    #   config.output_style = :compressed
+    # end
   end
 
   helpers do
@@ -40,4 +40,5 @@ class Inliner < Middleman::Extension
   end
 end
 
-Inliner.register(:inliner)
+# Inliner.register(:inliner)
+::Middleman::Extensions.register(:inliner, Inliner)
