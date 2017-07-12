@@ -21,7 +21,9 @@ class Inliner < Middleman::Extension
     def inline_js(*names)
       names.map { |name|
         name += ".js" unless name.include?(".js")
-        js = sprockets.find_asset(name).to_s
+        js_path = sitemap.resources.select { |p| p.source_file.include?(name) }.first
+        # js = sprockets.find_asset(name).to_s
+        js = js_path.render
         "<script type='text/javascript'>#{defined?(Uglifier) ? Uglifier.compile(js) : js}</script>"
       }.reduce(:+)
     end
